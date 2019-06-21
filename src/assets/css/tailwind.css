@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container-nav{
+    width: 100%;
+    background: #f7fafcea;
+}
+.container-inner{
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    overflow: hidden;
+}
