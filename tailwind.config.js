@@ -9,6 +9,16 @@ module.exports = {
       padding:'1rem'
     },
     colors: {
+      background:{
+        primary:'var(--bg-background-primary) !important',
+        secondary: 'var(--bg-background-secondary) !important',
+        ternary: 'var(--bg-background-ternary) !important',
+      },
+      copy:{
+        primary:'var(--text-copy-primary) !important',
+        secondary: 'var(--text-copy-hover) !important',
+        ternary:'var(--text-copy-ternary) !important',
+      },
       transparent: 'transparent',
 
       black: '#000',
@@ -60,6 +70,7 @@ module.exports = {
         'monospace',
       ],
     },
+
     
   },
   variants: {},

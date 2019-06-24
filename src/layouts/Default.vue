@@ -1,7 +1,8 @@
 <template>
-  <div id="home" class="font-sans text-gray-800 leading-normal flex flex-col min-h-screen overflow-hidden">
+  <div id="home" :class="theme" class="content-wrapper bg-background-primary font-sans text-copy-primary leading-normal flex flex-col min-h-screen overflow-hidden">
+   
     <header class="">
-      <nav class=" border-t-8 border-blue container-nav bg-gray-100  w-full  flex justify-between items-center py-3 fixed" >
+      <nav class=" border-t-8 border-blue container-nav bg-background-ternary  w-full  flex justify-between items-center py-3 fixed" >
         <a href="#" class="hidden md:flex justify-center items-center md:ml-12"> 
           <div >
             <img class="w-6" src="../../static/img/triangle.png" alt="logo">
@@ -9,11 +10,21 @@
          <div class="my-2 text-2xl uppercase font-bold"> <h1>LLan Sanchez</h1></div>
         </a>
         <ul class=" hidden md:flex uppercase tracking-wide font-bold  items-center ">
-          <li class="mr-8"><a href="/" class="text-gray-800 hover:text-gray-600 ">Home</a></li>
-          <li class="mr-8"><a href="#about"  class="text-gray-800 hover:text-gray-600">About</a></li>
-          <li class="mr-8"><a href="#skill" class="text-gray-800 hover:text-gray-600">Skill</a></li>
-          <li class="mr-8"><a href="#blog"  class="text-gray-800 hover:text-gray-600">Blog</a></li>
-          <li class="mr-8"><a href="#contact" class="text-gray-800 hover:text-gray-600">Contact</a></li>
+          <li class="mr-8">
+            <a href="#" @click.prevent="toggleTheme">
+              <svg v-if="theme == 'theme-light'" width="25" viewBox="0 0 512 512"><title>moon</title><g fill="#2d3748"><path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path></g></svg>
+              <svg v-else  width="25" viewBox="0 0 48 48"><title>ic_wb_sunny_48px</title>
+                  <g fill="#edf2f7">
+                      <path d="M13.51 9.69L9.93 6.1 7.1 8.93l3.59 3.59 2.82-2.83zM8 21H2v4h6v-4zM26 1.1h-4V7h4V1.1zm14.9 7.83L38.07 6.1l-3.59 3.59 2.83 2.83 3.59-3.59zm-6.41 27.38l3.59 3.59 2.83-2.83-3.59-3.59-2.83 2.83zM40 21v4h6v-4h-6zM24 11c-6.63 0-12 5.37-12 12s5.37 12 12 12 12-5.37 12-12-5.37-12-12-12zm-2 33.9h4V39h-4v5.9zM7.1 37.07l2.83 2.83 3.59-3.59-2.83-2.83-3.59 3.59z"></path>
+                  </g>
+              </svg>
+            </a>
+          </li>
+          <li class="mr-8"><a href="/" class=" text-copy-primary hover:text-gray-600 ">Home</a></li>
+          <li class="mr-8"><a href="#about"  class="text-copy-primary hover:text-gray-600">About</a></li>
+          <li class="mr-8"><a href="#skill" class="text-copy-primary hover:text-gray-600">Skill</a></li>
+          <li class="mr-8"><a href="#blog"  class="text-copy-primary hover:text-gray-600">Blog</a></li>
+          <li class="mr-8"><a href="#contact" class="text-copy-primary hover:text-gray-600">Contact</a></li>
 
         </ul>
         <ul class="w-full flex justify-center items-center md:hidden">
@@ -51,29 +62,12 @@
         </ul>
       </nav>
     </header> 
-    <div class="flex-grow">
 
-    <slot/>
+    <div class="flex-grow">
+      <slot/>
     </div>
-    <footer class="bg-gray-400 text-blue">
-      <div class=" container mx-auto flex items-center justify-between py-5">
-        <div>Copyright 2019 All rights reserved</div>
-          <ul class="flex items-center">
-            <li class="mr-8"> <g-link to="/">
-            <svg width="30" viewBox="0 -47 512.002 512"><title>043-twitter</title><g><path d="M191.012 419.043c-22.14 0-44.93-1.793-67.856-5.387-40.379-6.332-81.254-27.457-92.82-33.781L0 363.293l32.844-10.8c35.902-11.81 57.742-19.134 84.777-30.602-27.07-13.11-47.933-36.688-57.976-67.172l-7.641-23.2 6.266.961A113.77 113.77 0 0 1 44 214.883c-12.934-19.64-19.781-43.649-18.324-64.215l1.437-20.246 12.121 4.695a113.295 113.295 0 0 1-10.98-30.781C22.96 77.98 27.39 49.976 40.73 25.484L51.29 6.102l14.12 16.964c44.66 53.649 101.227 85.473 168.363 94.79-2.742-18.903-.687-37.149 6.114-53.497 7.918-19.039 22.004-35.187 40.722-46.691 20.79-12.777 46-18.969 70.989-17.434 26.511 1.625 50.582 11.559 69.699 28.743 9.336-2.422 16.215-5.012 25.512-8.512 5.593-2.11 11.937-4.496 19.875-7.23l29.25-10.079-19.075 54.473c1.258-.106 2.555-.192 3.91-.254l31.235-1.414-18.461 25.234c-1.059 1.446-1.328 1.852-1.703 2.418-1.488 2.242-3.34 5.035-28.68 38.867-6.344 8.473-9.512 19.512-8.922 31.082 2.246 43.97-3.148 83.747-16.043 118.231-12.195 32.629-31.093 60.621-56.164 83.2-31.023 27.94-70.582 47.066-117.582 56.847-23.054 4.8-47.812 7.203-73.437 7.203zm0 0" fill="#25d9f8"></path><path d="M476.855 57.629L495.93 3.152 466.68 13.23c-7.938 2.735-14.278 5.125-19.875 7.23-9.297 3.505-16.172 6.095-25.508 8.517C402.176 11.793 378.109 1.859 351.594.23c-24.989-1.535-50.196 4.657-70.985 17.434-9.562 5.879-17.902 12.969-24.84 21.031V413.52a315.746 315.746 0 0 0 8.68-1.68c46.996-9.781 86.559-28.91 117.582-56.848 25.07-22.582 43.969-50.574 56.164-83.199 12.895-34.484 18.29-74.266 16.043-118.234-.593-11.57 2.575-22.606 8.922-31.079 25.336-33.832 27.192-36.625 28.68-38.867.37-.566.644-.976 1.703-2.422L512 55.961l-31.23 1.414a96.558 96.558 0 0 0-3.915.254zm0 0" fill="#00c0f1"></path></g></svg>
-            </g-link> </li>
-            <li class="mr-8"> <g-link to="/">
-            <svg width="30" viewBox="0 0 512 512"><title>025-instagram</title><g><path d="M437 0H75C33.602 0 0 33.602 0 75v362c0 41.398 33.602 75 75 75h362c41.398 0 75-33.602 75-75V75c0-41.398-33.602-75-75-75zm0 0" fill="#ff5b5b"></path><path d="M512 75v362c0 41.398-33.602 75-75 75H256V0h181c41.398 0 75 33.602 75 75zm0 0" fill="#ff3997"></path><path d="M407 150c-24.813 0-45-20.188-45-45s20.188-45 45-45 45 20.188 45 45-20.188 45-45 45zm0-60c-8.277 0-15 6.723-15 15s6.723 15 15 15 15-6.723 15-15-6.723-15-15-15zm0 0" fill="#e2e2e7"></path><path d="M256 120c-74.398 0-135 60.598-135 135 0 74.398 60.602 135 135 135s136-60.602 136-135c0-74.402-61.602-135-136-135zm0 240c-57.898 0-105-47.102-105-105s47.102-105 105-105 106 47.102 106 105-48.102 105-106 105zm0 0" fill="#ececf1"></path><path d="M392 255c0 74.398-61.602 135-136 135v-30c57.898 0 106-47.102 106-105s-48.102-105-106-105v-30c74.398 0 136 60.598 136 135zm0 0" fill="#e2e2e7"></path></g></svg>
-            </g-link> </li>
-            <li class="mr-8"> <g-link to="/">
-            <svg  width="30" viewBox="0 0 512 512"><title>038-github</title><g><path d="M512 257c0 120-84.102 220.5-196 247.5l-30.602-97.2h-58.796L197 504.5C85.102 477.5 0 377 0 257 0 116.3 115.3 0 256 0s256 116.3 256 257zm0 0" fill="#384949"></path><path d="M512 257c0 120-84.102 220.5-196 247.5l-30.602-97.2H256V0c140.7 0 256 116.3 256 257zm0 0" fill="#293939"></path><path d="M181.277 430.059a62.818 62.818 0 0 1-17.828-2.579c-15.129-4.468-27.422-14.546-36.547-29.914-4.16-7.015-8.496-11.878-13.605-15.308-5.027-3.383-9.04-4.672-13.274-4.363l-2.636-29.883c11.117-.953 21.754 2.062 32.593 9.316 8.833 5.902 16.258 14.063 22.72 24.914 5.304 8.922 11.41 14.153 19.25 16.469 8.804 2.59 17.94 1.508 29.632-3.473l11.809 27.567c-11.297 4.836-21.93 7.254-32.114 7.254zm0 0" fill="#ececf1"></path><path d="M400.902 287.3c-10.504 27.9-36.902 63.302-103.8 73.2C305.8 373.398 316.3 380.3 316 407.3v97.2c-19.2 4.8-39.3 7.5-60 7.5s-39.8-2.7-59-7.5v-98.402c0-26.7 10.102-34.2 17.898-45.598-66.898-9.902-93.296-45.3-103.8-73.2C97 250.099 104.5 203.899 129.102 174.5c.597-.602 1.5-2.102 1.199-3-11.403-34.2 2.398-62.7 3-65.7 12.898 3.9 15-3.902 56.699 21.598l7.2 4.204c3 1.796 2.1.597 5.1.597 17.4-4.8 35.7-7.5 53.7-7.5 18.3 0 36.3 2.7 54.598 7.5l2.101.301s.598 0 2.102-.898c51.898-31.504 50.097-21.301 64.195-25.801.3 3 14.102 31.797 2.703 65.699-1.5 4.5 45 47.098 19.203 115.8zm0 0" fill="#ececf1"></path><path d="M400.902 287.3c-10.504 27.9-36.902 63.302-103.8 73.2C305.8 373.398 316.3 380.3 316 407.3v97.2c-19.2 4.8-39.3 7.5-60 7.5V124.7c18.3 0 36.3 2.698 54.602 7.5l2.097.3s.602 0 2.102-.898C366.699 100.098 364.898 110.3 379 105.8c.3 3 14.102 31.797 2.7 65.699-1.5 4.5 45 47.098 19.202 115.8zm0 0" fill="#e2e2e7"></path></g></svg>
-            </g-link> </li>
-            <li class="mr-8"> <g-link to="/">
-            <svg  width="30" viewBox="0 0 512 512"><title>021-facebook</title><g><path d="M512 75v362c0 41.398-33.602 75-75 75H316l-30-30h-30l-30 30H75c-41.398 0-75-33.602-75-75V75C0 33.602 33.602 0 75 0h362c41.398 0 75 33.602 75 75zm0 0" fill="#7984eb"></path><path d="M512 75v362c0 41.398-33.602 75-75 75H316l-30-30h-15V0h166c41.398 0 75 33.602 75 75zm0 0" fill="#4661d1"></path><path d="M316 180v60h90l-15 90h-75v182h-90V330h-60v-90h60v-60c0-33.3 18.3-62.402 45-78 13.2-7.5 28.8-12 45-12h90v90zm0 0" fill="#ececf1"></path><path d="M316 180v60h90l-15 90h-75v182h-45V102c13.2-7.5 28.8-12 45-12h90v90zm0 0" fill="#e2e2e7"></path></g></svg>
-            </g-link> </li>
-          </ul>
-      </div>
-    </footer>
+    
+    <footer-page></footer-page>
   </div>
 </template>
 
@@ -85,6 +79,25 @@ query {
 }
 </static-query>
 
-<style>
-
-</style>
+<script>
+import footer from "../components/footer";
+export default {
+  components:{
+    footerPage:footer,
+  },
+  created() {
+    this.theme = localStorage.getItem('theme') || 'theme-light';
+  },
+  data() {
+    return {
+      theme:'theme-light'
+    }
+  },
+  methods: {
+    toggleTheme(){
+      this.theme = this.theme === 'theme-light' ? 'theme-dark' : 'theme-light';
+      localStorage.setItem('theme',this.theme);
+    }
+  },
+}
+</script>
